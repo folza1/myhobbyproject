@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\WeightController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +21,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::post('/home', [WeightController::class, 'store']);
+Route::get('/home', [WeightController::class, 'index']);
+
