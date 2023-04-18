@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\WeightController;
+use App\Http\Middleware\OnlyGuests;
+use App\Http\Middleware\OnlyUsers;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,11 +18,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->middleware(OnlyGuests::class);
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::post('/home', [WeightController::class, 'store']);
-Route::get('/home', [WeightController::class, 'index']);
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware(OnlyUsers::class);
+Route::post('/home', [WeightController::class, 'store'])->middleware(OnlyUsers::class);
+Route::get('/home', [WeightController::class, 'index'])->middleware(OnlyUsers::class);
 

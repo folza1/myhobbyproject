@@ -11,7 +11,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+            crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.js"
+            integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+
     <!-- Styles -->
+
     <style>
         /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
         html {
@@ -399,7 +407,8 @@
         body {
             font-family: 'Nunito', sans-serif;
         }
-        .divsize{
+
+        .divsize {
             background-color: green;
             position: relative;
             width: 100%;
@@ -412,6 +421,24 @@
     </style>
 </head>
 <body>
+@if(Session::has('failed_message'))
+    <div id="failed-alert" class="alert alert-warning alert-dismissible fade show text-center" role="alert">
+        {{ Session::get('failed_message') }}
+    </div>
+    <script>
+        $(document).ready(function() {
+            // Delay the alert hide for 5 seconds
+            setTimeout(function() {
+                $("#failed-alert").alert('close');
+            }, 5000);
+
+            // Close the alert when the close button is clicked
+            $("#failed-alert").on('click', function() {
+                $("#failed-alert").alert('close');
+            });
+        });
+    </script>
+@endif
 <div class="container col-md-9 border p-4 mt-4 mb-4">
     <div class="col-md-12 mx-auto text-center p-5 border m-4">
         <h1 class="text-gray-700 dark:text-gray-500">Track Your weight!</h1>
@@ -424,7 +451,7 @@
             @else
                 <div class="col-md-6 d-flex justify-content-center">
                     <a href="{{ route('login') }}" class="text-gray-700 dark:text-gray-500 underline"><h1>Log
-                        in</h1></a>
+                            in</h1></a>
                 </div>
 
                 @if (Route::has('register'))
