@@ -26,17 +26,21 @@
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <div class="card">
-                    <div class="card-header">Write in your weight!</div>
+                    <div class="card-header"><h3>Write in your weight!</h3></div>
 
                     <div class="card-body">
                         <form method="post" action="/home">
                             @csrf
                             <div>
-                                <label for="weight">Weight:</label>
-                                <input type="number" step="0.01" min="0" name="weight" id="weight" required
-                                       class="form-control mb-3" autofocus>
+                                <label for="weight"><h4>Weight:</h4></label>
+                                <div class="row ms-1 me-1 d-flex align-items-center" style="height: 50px;">
+                                    <input type="number" step="0.01" min="0" name="weight" id="weight" required
+                                           class="form-control ps-3 w-25 h-75" autofocus>
+                                    <div class="w-50 ps-5 h-75 d-flex align-items-center"><h3 class="p-0 m-0">Average Weight: <span class="text-success fw-bolder">{!! number_format($weights->pluck('weight')->avg(),2) !!}</span>Kg</h3></div>
+                                    <div class="w-25"><a href="{{ route('profile') }}" class="btn btn-primary w-100"><h5>Profil</h5></a></div>
+                                </div>
                             </div>
-                            <button type="submit">Submit</button>
+                            <button type="submit" class="btn btn-danger mt-2">Submit</button>
                         </form>
                     </div>
                 </div>

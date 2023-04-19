@@ -26,3 +26,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::post('/home', [WeightController::class, 'store'])->middleware(OnlyUsers::class);
 Route::get('/home', [WeightController::class, 'index'])->middleware(OnlyUsers::class);
 
+Route::get('/profile', function () {
+    return view('profile');
+})->name('profile')->middleware(OnlyUsers::class);
+
